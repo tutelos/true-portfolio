@@ -11,6 +11,7 @@ export type Project = {
   stack: string[]
   description: string
   url: string | null
+  image: string | null
   /** identificador do visual abstrato do card */
   art: 'atlas' | 'atlas-landing' | 'rubiks' | 'keyboard' | 'tws'
 }
@@ -25,6 +26,7 @@ export const PROJECTS: Project[] = [
     description:
       'Sistema de gestão escolar com módulos de secretaria e vida acadêmica.',
     url: 'https://atlaschoolhub.netlify.app/',
+    image: '/atlas.png',
     art: 'atlas',
   },
   {
@@ -35,6 +37,7 @@ export const PROJECTS: Project[] = [
     stack: ['HTML', 'CSS', 'JavaScript'],
     description: 'Página comercial com planos e formulário de negócio.',
     url: 'https://atlaschoolhub-landing.netlify.app/',
+    image: '/atlas-landing.png',
     art: 'atlas-landing',
   },
   {
@@ -45,6 +48,7 @@ export const PROJECTS: Project[] = [
     stack: ['HTML', 'CSS', 'JavaScript'],
     description: 'Landing page moderna e responsiva com foco em conversão.',
     url: null,
+    image: '/rubiks-landing.png',
     art: 'rubiks',
   },
   {
@@ -55,6 +59,7 @@ export const PROJECTS: Project[] = [
     stack: ['HTML', 'CSS', 'JavaScript'],
     description: 'Página de produto para um teclado mecânico premium.',
     url: null,
+    image: '/keyboard-landing.png',
     art: 'keyboard',
   },
   {
@@ -65,6 +70,7 @@ export const PROJECTS: Project[] = [
     stack: ['HTML', 'CSS', 'JavaScript'],
     description: 'Landing page de fones de ouvido sem fio.',
     url: null,
+    image: '/tws-landing.png',
     art: 'tws',
   },
 ]

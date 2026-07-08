@@ -105,7 +105,7 @@ export default function Projects() {
                 <div className="order-1 aspect-[16/9] self-start overflow-hidden border border-white/[0.07] md:order-2 md:col-span-8">
                   <div className="project-art h-full w-full">
                     <div className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]">
-                      <ProjectArt art={project.art} name={project.name} />
+                      <ProjectArt art={project.art} name={project.name} image={project.image} />
                     </div>
                   </div>
                 </div>
