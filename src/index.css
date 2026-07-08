@@ -230,8 +230,100 @@ html.no-anim .mask-line > span {
   transform-origin: left;
 }
 
+/* ————— image animations (projects) ————— */
+@keyframes image-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes subtle-glow {
+  0%, 100% {
+    filter: brightness(1) contrast(1);
+  }
+  50% {
+    filter: brightness(1.02) contrast(1.01);
+  }
+}
+
+@keyframes scanline-subtle {
+  0% {
+    top: -100%;
+    opacity: 0;
+  }
+  2% {
+    opacity: 0.3;
+  }
+  98% {
+    opacity: 0.3;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+.project-image {
+  animation: image-fade-in 1.2s ease-out;
+}
+
+.project-image img {
+  animation: subtle-glow 4s ease-in-out infinite;
+  transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.group:hover .project-image img {
+  transform: scale(1.015);
+}
+
+/* ————— project-image scanline effect ————— */
+.project-image::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.015) 0px,
+    rgba(255, 255, 255, 0.015) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  animation: scanline-subtle 8s linear infinite;
+  mix-blend-mode: overlay;
+}
+
+/* ————— project-image vignette ————— */
+.project-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+  pointer-events: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .scanline {
+    animation: none;
+    opacity: 0;
+  }
+  .project-image {
+    animation: none;
+  }
+  .project-image img {
+    animation: none;
+  }
+  .project-image::before {
     animation: none;
     opacity: 0;
   }

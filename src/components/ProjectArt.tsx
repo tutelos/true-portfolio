@@ -3,7 +3,7 @@ import type { Project } from '../data/content'
 /**
  * Visual abstrato monocromático por projeto — evita imagens genéricas
  * e mantém a estética industrial do briefing.
- * Também exibe imagens quando disponíveis.
+ * Também exibe imagens quando disponíveis com efeitos integrados.
  */
 export default function ProjectArt({ art, name, image }: { art: Project['art']; name: string; image: string | null | undefined }) {
   return (
@@ -14,22 +14,40 @@ export default function ProjectArt({ art, name, image }: { art: Project['art']; 
     >
       {/* Imagem quando disponível */}
       {image && (
-        <img
-          src={image}
-          alt={name}
-          className="h-full w-full object-cover"
-        />
+        <div className="project-image absolute inset-0 h-full w-full">
+          {/* grid background sutil */}
+          <div
+            className="absolute inset-0 opacity-20"
+            style={{
+              backgroundImage:
+                'linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)',
+              backgroundSize: '48px 48px',
+            }}
+          />
+
+          {/* imagem principal */}
+          <img
+            src={image}
+            alt={name}
+            className="relative z-10 h-full w-full object-cover"
+          />
+
+          {/* scanline decorativo já vem do CSS via ::before */}
+          {/* vignette já vem do CSS via ::after */}
+        </div>
       )}
 
-      {/* grid interno */}
-      <div
-        className={`absolute inset-0 ${image ? 'opacity-0' : 'opacity-[0.5]'}`}
-        style={{
-          backgroundImage:
-            'linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)',
-          backgroundSize: '48px 48px',
-        }}
-      />
+      {/* grid interno (fallback) */}
+      {!image && (
+        <div
+          className="absolute inset-0 opacity-[0.5]"
+          style={{
+            backgroundImage:
+              'linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)',
+            backgroundSize: '48px 48px',
+          }}
+        />
+      )}
 
       {/* visuais abstratos como fallback */}
       {!image && (
