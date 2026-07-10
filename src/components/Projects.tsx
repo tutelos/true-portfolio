@@ -83,16 +83,6 @@ export default function Projects() {
                   <div>
                     <div className="flex items-center gap-3">
                       <span className="label">{project.index}</span>
-                      {isLive && (
-                        <span className="label-xs inline-block rounded-full bg-green-500/20 px-2 py-1 text-green-400">
-                          LIVE
-                        </span>
-                      )}
-                      {!isLive && (
-                        <span className="label-xs inline-block rounded-full bg-white/10 px-2 py-1 text-white/40">
-                          OFFLINE
-                        </span>
-                      )}
                     </div>
                     <h3 className={`display mt-4 text-3xl transition-transform duration-500 md:text-5xl ${
                       isLive ? 'text-fg group-hover:translate-x-2' : 'text-fg-2'
