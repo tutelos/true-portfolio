@@ -59,6 +59,15 @@ export default function Projects() {
         {PROJECTS.map((project) => {
           const Tag = project.url ? 'a' : 'div'
           const isLive = project.url !== null
+          const linkProps = project.url
+            ? {
+                href: project.url,
+                target: '_blank',
+                rel: 'noopener noreferrer',
+                'aria-label': `Abrir ${project.name}`,
+              }
+            : {}
+
           return (
             <li
               key={project.index}
@@ -66,10 +75,8 @@ export default function Projects() {
               className={`hairline-b group transition-all duration-300 ${isLive ? 'hover:bg-white/[0.02]' : ''}`}
             >
               <Tag
-                {...(project.url
-                  ? { href: project.url, target: '_blank', rel: 'noopener noreferrer' }
-                  : {})}
-                className={`grid grid-cols-1 gap-8 py-12 md:grid-cols-12 md:gap-10 md:py-16 ${isLive ? 'cursor-pointer' : ''}`}
+                {...linkProps}
+                className={`grid w-full grid-cols-1 gap-8 py-12 md:grid-cols-12 md:gap-10 md:py-16 ${isLive ? 'cursor-pointer' : ''}`}
               >
                 {/* meta esquerda */}
                 <div className="order-2 flex flex-col justify-between md:order-1 md:col-span-4">

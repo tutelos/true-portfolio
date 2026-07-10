@@ -4,7 +4,7 @@ export default function Footer() {
       <span className="label-xs">© 2025 Arthur Satoshi</span>
       <span className="label-xs">Design & Code — AS®</span>
       <span className="label-xs">
-        SYSTEM REV 2.4 — <span className="text-white/40">ONLINE</span>
+        SYSTEM REV 2.4 — <span className="text-white/40"></span>
       </span>
     </footer>
   )
