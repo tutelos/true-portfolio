@@ -1,12 +1,19 @@
 import { useEffect, useRef } from 'react'
+import { ArrowUpRight } from 'lucide-react'
+import { LINKS } from '../data/content'
 import { gsap, EASE } from '../lib/anim'
 
-const SPECS = [
+type Spec =
+  | { label: string; value: string }
+  | { label: string; value: string; href: string }
+
+const SPECS: Spec[] = [
   { label: 'Location', value: 'Brazil' },
   { label: 'Experience', value: 'Since 2023' },
   { label: 'Stack', value: 'React · JS · Python' },
   { label: 'Available', value: 'Freelance' },
-  { label: 'Status', value: 'Open' },
+  { label: 'GitHub', value: 'tutelos', href: LINKS.github },
+  { label: 'Email', value: 'Contact', href: LINKS.email },
 ]
 
 export default function Hero() {
@@ -96,9 +103,25 @@ export default function Hero() {
                 className="hairline-b flex items-baseline justify-between gap-6 py-3"
               >
                 <span className="label">{spec.label}</span>
-                <span className="font-mono text-[11px] tracking-wide text-fg-2">
-                  {spec.value}
-                </span>
+                {'href' in spec ? (
+                  <a
+                    href={spec.href}
+                    target={spec.href.startsWith('mailto:') ? undefined : '_blank'}
+                    rel={spec.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                    className="group/profile inline-flex items-center gap-1.5 border-b border-white/35 pb-0.5 font-mono text-[11px] tracking-wide text-fg transition-colors duration-300 hover:border-white hover:text-white"
+                    aria-label={`Abrir ${spec.label}`}
+                  >
+                    {spec.value}
+                    <ArrowUpRight
+                      size={11}
+                      className="transition-transform duration-300 group-hover/profile:-translate-y-0.5 group-hover/profile:translate-x-0.5"
+                    />
+                  </a>
+                ) : (
+                  <span className="font-mono text-[11px] tracking-wide text-fg-2">
+                    {spec.value}
+                  </span>
+                )}
               </li>
             ))}
           </ul>

@@ -1,6 +1,6 @@
 export const LINKS = {
   github: 'https://github.com/tutelos',
-  email: 'mailto:seu-email@exemplo.com',
+  email: 'https://mail.google.com/mail/u/1/#sent?compose=jrjtXVZFHbPlSKvlMLtLBpZdNrWwXZQKbszwkkJxnJgVRkgGRthBJVSvVQKqkcJRvmkhBJGc',
 }
 
 export type Project = {
