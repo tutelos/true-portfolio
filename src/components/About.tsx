@@ -1,22 +1,20 @@
 import { useRef } from 'react'
+import { COPY, type Lang } from '../data/i18n'
 import { useSectionReveal } from '../lib/anim'
 
-const NUMBERS = [
-  { value: '03+', label: 'Years' },
-  { value: '05+', label: 'Projects' },
-  { value: '100%', label: 'Passion' },
-]
+const VALUES = ['03+', '05+', '100%']
 
-export default function About() {
+export default function About({ lang }: { lang: Lang }) {
   const ref = useRef<HTMLElement>(null)
   useSectionReveal(ref)
+  const copy = COPY[lang].about
 
   return (
     <section id="about" ref={ref} className="relative px-5 pb-28 pt-20 md:px-10 md:pt-32">
       <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
         <div className="md:col-span-3">
           <span data-reveal className="label">
-            About — 02
+            {copy.label}
           </span>
         </div>
 
@@ -26,36 +24,30 @@ export default function About() {
             style={{ fontSize: 'clamp(1.8rem, 4.2vw, 4rem)', lineHeight: 1.05 }}
           >
             <span className="mask-line">
-              <span>Desenvolvedor web focado em</span>
+              <span>{copy.headline[0]}</span>
             </span>
             <span className="mask-line">
-              <span>
-                interfaces <span className="text-fg-3">claras, rápidas</span>
-              </span>
+              <span className="text-fg-3">{copy.headline[1]}</span>
             </span>
             <span className="mask-line">
-              <span>
-                e <span className="text-fg-3">prontas para produção.</span>
-              </span>
+              <span>{copy.headline[2]}</span>
             </span>
           </h2>
 
           <p data-reveal className="mt-10 max-w-md text-sm leading-relaxed text-fg-3">
-            Desde 2023 construindo para a web — de landing pages de alta conversão a
-            um SaaS completo de gestão escolar. Design e engenharia tratados como uma
-            coisa só.
+            {copy.text}
           </p>
 
           <div className="hairline-t mt-16 grid grid-cols-3">
-            {NUMBERS.map((num, i) => (
+            {VALUES.map((value, i) => (
               <div
-                key={num.label}
+                key={value}
                 data-reveal
                 data-delay={String(i * 0.1)}
-                className="border-r border-white/[0.08] py-8 pr-6 last:border-r-0 md:py-10"
+                className="border-r border-line py-8 pr-6 last:border-r-0 md:py-10"
               >
-                <span className="display block text-4xl text-fg md:text-6xl">{num.value}</span>
-                <span className="label mt-3 block">{num.label}</span>
+                <span className="display block text-4xl text-fg md:text-6xl">{value}</span>
+                <span className="label mt-3 block">{copy.numbers[i]}</span>
               </div>
             ))}
           </div>

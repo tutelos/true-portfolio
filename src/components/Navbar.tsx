@@ -1,10 +1,20 @@
 import { useEffect, useState } from 'react'
-import { NAV } from '../data/content'
+import { Languages, Moon, Sun } from 'lucide-react'
+import { COPY, NAV_COPY, type Lang, type Theme } from '../data/i18n'
 import { scrollToSection } from '../lib/scroll'
 
-export default function Navbar() {
+type NavbarProps = {
+  lang: Lang
+  theme: Theme
+  onToggleLang: () => void
+  onToggleTheme: () => void
+}
+
+export default function Navbar({ lang, theme, onToggleLang, onToggleTheme }: NavbarProps) {
   const [solid, setSolid] = useState(false)
   const [open, setOpen] = useState(false)
+  const nav = NAV_COPY[lang]
+  const copy = COPY[lang]
 
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 40)
@@ -29,11 +39,11 @@ export default function Navbar() {
           onClick={go('#home')}
           className="font-display text-[13px] font-bold tracking-[0.22em] text-fg"
         >
-          AS<span className="text-fg-3">®</span>
+          AS<span className="text-fg-3">&reg;</span>
         </a>
 
         <ul className="hidden items-center gap-8 md:flex">
-          {NAV.map((item) => (
+          {nav.map((item) => (
             <li key={item.hash}>
               <a
                 href={item.hash}
@@ -46,14 +56,50 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-3">
+          <div className="hidden items-center border border-line md:flex">
+            <button
+              type="button"
+              aria-label={theme === 'dark' ? 'Ativar modo claro' : 'Ativar modo escuro'}
+              onClick={onToggleTheme}
+              className="inline-flex h-8 items-center gap-2 border-r border-line px-3 font-mono text-[10px] uppercase tracking-[0.18em] text-fg-2 transition-colors duration-300 hover:bg-fg hover:text-bg"
+            >
+              {theme === 'dark' ? <Sun size={12} /> : <Moon size={12} />}
+              {theme === 'dark' ? 'Light' : 'Dark'}
+            </button>
+            <button
+              type="button"
+              aria-label={lang === 'pt' ? 'Switch to English' : 'Mudar para portugues'}
+              onClick={onToggleLang}
+              className="inline-flex h-8 items-center gap-2 px-3 font-mono text-[10px] uppercase tracking-[0.18em] text-fg-2 transition-colors duration-300 hover:bg-fg hover:text-bg"
+            >
+              <Languages size={12} />
+              {lang === 'pt' ? 'EN' : 'PT'}
+            </button>
+          </div>
           <a
             href="#contact"
             onClick={go('#contact')}
-            className="hidden border border-white/20 px-5 py-2 font-mono text-[10px] tracking-[0.18em] uppercase text-fg transition-all duration-300 hover:bg-white hover:text-black md:inline-block"
+            className="hidden border border-line px-5 py-2 font-mono text-[10px] tracking-[0.18em] uppercase text-fg transition-all duration-300 hover:bg-fg hover:text-bg md:inline-block"
           >
-            Let's Talk
+            {copy.navCta}
           </a>
+          <button
+            type="button"
+            aria-label={theme === 'dark' ? 'Ativar modo claro' : 'Ativar modo escuro'}
+            onClick={onToggleTheme}
+            className="inline-flex h-9 w-9 items-center justify-center border border-line text-fg-2 transition-colors duration-300 hover:bg-fg hover:text-bg md:hidden"
+          >
+            {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
+          </button>
+          <button
+            type="button"
+            aria-label={lang === 'pt' ? 'Switch to English' : 'Mudar para portugues'}
+            onClick={onToggleLang}
+            className="inline-flex h-9 w-9 items-center justify-center border border-line font-mono text-[10px] uppercase tracking-[0.12em] text-fg-2 transition-colors duration-300 hover:bg-fg hover:text-bg md:hidden"
+          >
+            {lang === 'pt' ? 'EN' : 'PT'}
+          </button>
           <button
             type="button"
             aria-label="Menu"
@@ -61,10 +107,10 @@ export default function Navbar() {
             className="flex h-9 w-9 flex-col items-center justify-center gap-[5px] md:hidden"
           >
             <span
-              className={`block h-px w-5 bg-white transition-transform duration-300 ${open ? 'translate-y-[3px] rotate-45' : ''}`}
+              className={`block h-px w-5 bg-fg transition-transform duration-300 ${open ? 'translate-y-[3px] rotate-45' : ''}`}
             />
             <span
-              className={`block h-px w-5 bg-white transition-transform duration-300 ${open ? '-translate-y-[3px] -rotate-45' : ''}`}
+              className={`block h-px w-5 bg-fg transition-transform duration-300 ${open ? '-translate-y-[3px] -rotate-45' : ''}`}
             />
           </button>
         </div>
@@ -72,7 +118,7 @@ export default function Navbar() {
 
       {open && (
         <ul className="hairline-t flex flex-col gap-1 px-5 pb-6 pt-4 md:hidden">
-          {NAV.map((item) => (
+          {nav.map((item) => (
             <li key={item.hash}>
               <a
                 href={item.hash}

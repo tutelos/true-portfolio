@@ -1,11 +1,13 @@
 import { useRef } from 'react'
 import { ArrowUpRight } from 'lucide-react'
 import { LINKS } from '../data/content'
+import { COPY, type Lang } from '../data/i18n'
 import { useSectionReveal } from '../lib/anim'
 
-export default function Contact() {
+export default function Contact({ lang }: { lang: Lang }) {
   const ref = useRef<HTMLElement>(null)
   useSectionReveal(ref)
+  const copy = COPY[lang].contact
 
   return (
     <section
@@ -15,23 +17,23 @@ export default function Contact() {
     >
       <div className="flex items-start justify-between">
         <span data-reveal className="label">
-          Contact — 05
+          {copy.label}
         </span>
         <span data-reveal className="label-xs">
-          RESPONSE &lt; 24H
+          {copy.response}
         </span>
       </div>
 
       <div>
         <h2 className="display text-fg" style={{ fontSize: 'clamp(3rem, 10.5vw, 10.5rem)' }}>
           <span className="mask-line">
-            <span>Let's Build</span>
+            <span>{copy.headline[0]}</span>
           </span>
           <span className="mask-line">
-            <span className="text-fg-3">Something</span>
+            <span className="text-fg-3">{copy.headline[1]}</span>
           </span>
           <span className="mask-line">
-            <span>Amazing</span>
+            <span>{copy.headline[2]}</span>
           </span>
         </h2>
 
@@ -39,9 +41,9 @@ export default function Contact() {
           <a
             data-reveal
             href={LINKS.email}
-            className="group inline-flex w-fit items-center gap-4 border border-white/25 px-8 py-4 font-mono text-[11px] uppercase tracking-[0.2em] text-fg transition-all duration-300 hover:bg-white hover:text-black"
+            className="group inline-flex w-fit items-center gap-4 border border-line px-8 py-4 font-mono text-[11px] uppercase tracking-[0.2em] text-fg transition-all duration-300 hover:bg-fg hover:text-bg"
           >
-            Get in touch
+            {copy.cta}
             <ArrowUpRight
               size={14}
               className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
